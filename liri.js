@@ -3,11 +3,11 @@
 require("dotenv").config();
 var keys = require("./keys.js");
 var Twitter = require('twitter');
-var Spotfy = require('spotify');
+// var Spotfy = require('spotify');
 var Request = require('request');
 
 //Initializes Spotify and Twitter objects for use in their respective commands
-var spotify = new Spotify(keys.spotify);
+// var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
 //Gets passed arguments and removes first two extraneous array entries 
@@ -28,7 +28,13 @@ if (args[0] == "my-tweets") {
 
 //Function for getting 20 tweets from attached twitter account
 function getTweets() {
-    console.log("fetching tweets");
+    client.get('statuses/user_timeline', function (error, tweets, response) {
+        if (!error) {
+            console.log(tweets);
+        } else {
+            console.log(error);
+        }
+    });
 }
 
 //Function for searching Spotify API for passed song
