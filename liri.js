@@ -30,7 +30,9 @@ if (args[0] == "my-tweets") {
 function getTweets() {
     client.get('statuses/user_timeline', function (error, tweets, response) {
         if (!error) {
-            console.log(tweets);
+            tweets.forEach(function(tweet) {
+                console.log(tweet.text + " " + tweet.created_at); 
+            });            
         } else {
             console.log(error);
         }
